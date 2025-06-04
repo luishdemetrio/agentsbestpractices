@@ -432,6 +432,61 @@ Ingest public website content into your Microsoft 365 tenant using a Graph conne
 </tbody>
 </table>
 
+`Question 2: Is there a book titled 'Governing the Moon: A History'?`
+
+
+<table>
+<thead>
+	<tr>
+		<th>Declarative Agent – Graph Connector</th>
+		<th>Custom Agent – Public website (real-time)</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Yes, there is a book titled Governing the Moon: A History by Stephen S. Buono. This book is part of the Monographs in Aerospace History series (No. 59) and was published by NASA's Office of Communications and NASA History Office in 2025. 
+		<br><br>The book provides a detailed history of the unratified Agreement Governing the Activities of States on the Moon and Other Celestial Bodies, commonly known as the Moon Treaty. It covers the treaty's origins, the contributions of international space lawyers, the negotiating process, and the role of the United States in shaping the final text1 .<br>
+		<br>1 reference<br><a href="https://www.nasa.gov/wp-content/uploads/2025/02/governing-the-moon-sp-2024-4559-ebook.pdf?emrc=67ab381807d35">https://www.nasa.gov/wp-content/uploads/2025/02/governing-the-moon-sp-2024-4559-ebook.pdf?emrc=67ab381807d35</a><br></td>
+		<td>Yes, there is a book titled &quot;Governing the Moon: A History&quot; by Stephen S. Buono, which is part of the NASA History Series 1 2 .
+		<br><br>2 references
+		<br>1 - <a heref="https://www.nasa.gov/history/history-publications-and-resources/nasa-history-series/">https://www.nasa.gov/history/history-publications-and-resources/nasa-history-series/</a><br>
+		2 - <a href="https://www.nasa.gov/history/history-publications-and-resources/">https://www.nasa.gov/history/history-publications-and-resources</a><br></td>
+	</tr>
+</tbody>
+</table>
+
+
+`Question 3: Summarize the recent discovery of an Einstein ring by the Euclid telescope`
+
+
+<table>
+<thead>
+	<tr>
+		<th>Declarative Agent – Graph Connector</th>
+		<th>Custom Agent – Public website (real-time)</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>The Euclid telescope recently made an exciting discovery of an Einstein ring. This phenomenon occurs when a massive object, such as a galaxy, bends the light from a more distant object, creating a ring-like structure. The discovery of this Einstein ring is significant as it provides valuable insights into the distribution of dark matter and the nature of gravitational lensing. The Euclid telescope's advanced capabilities have allowed us to observe this rare and fascinating cosmic event, furthering our understanding of the universe1 3 .
+        <br>3 references
+        <br>
+        1 - <a href="https://www.nasa.gov/history/nasas-discovery-program-book/">https://www.nasa.gov/history/nasas-discovery-program-book</a>
+        <br>
+        2 - <a href="https://www.nasa.gov/mission/sts-109/">https://www.nasa.gov/mission/sts-109</a>
+        <br>
+        3 - <a href="https://www.nasa.gov/history/history-publications-and-resources/nasa-history-series/not-yet-imagined-a-study-of-hubble-space-telescope-operations/">https://www.nasa.gov/history/history-publications-and-resources/nasa-history-series/not-yet-imagined-a-study-of-hubble-space-telescope-operations/</a>
+        
+        </td>
+		<td>The Euclid telescope recently discovered an Einstein Ring in our cosmic backyard. This discovery was made using data from ESA (European Space Agency) and NASA missions 1.
+		<br>
+        1 reference
+        <br>
+        1 - <a href="https://www.nasa.gov/universe/new-images-using-data-from-retired-telescopes-reveal-hidden-features/">https://www.nasa.gov/universe/new-images-using-data-from-retired-telescopes-reveal-hidden-features</a>
+        </td>
+	</tr>
+</tbody>
+</table>
 
 
 #### Implementation considerations
@@ -474,6 +529,20 @@ Your primary goal is to help customers resolve return-related issues efficiently
 while maintaining a helpful and professional tone.
 ```
 
+****Avoid** vague language or open-ended questions** that lack detail. Make it clear which document, project, or topic you are referring to, and what aspect you want to know. 
+
+**Example of a vague prompt:** A customer complained that Copilot returned the document creator or modifier instead of the policy approver. 
+
+![](images/bp01.png)
+
+To avoid ambiguity, ask specific questions like “Who approved the fraud management policy?” instead of “Who is the owner of the fraud management policy?”.
+
+![](images/bp02.png)
+
+Note that this time the agent correctly indicated that the policy was approved by the Board of Directors as outlined within the document:
+
+![](images/bp03.png)
+
 #### 2. Provide context and boundaries
 
 Establish the agent's scope and limitations:
@@ -484,7 +553,37 @@ inventory levels. You should not make exceptions to established policies
 without escalating to a human representative.
 ```
 
-#### 3. Include response guidelines
+Context can include the relevant file name, project name, time frame, or any specific details it should consider. For instance, if you want a summary of a meeting, mention which meeting (date and subject) to avoid confusion. 
+
+If you’re asking about `List all polices that are due for review`, clarify you mean the for review. Copilot does not automatically know which thing you’re referring to unless you tell it or it’s already in the conversation. 
+
+![](images/bp04.png)
+
+The agent might mistakenly conclude the files are under review by looking at the modified date instead of the content.
+
+![](images/bp05.png)
+
+The more relevant information you include in the prompt, the better the agent can understand your request and retrieve the correct information. Don’t assume the AI will infer everything – explicitly provide any detail that could influence the answer (such as the data source to use, the timeframe, or the specific subtopic of interest).
+
+#### 3. Include the Right “Prompt Ingredients” 
+
+Microsoft guidance suggests thinking of a prompt like a recipe: include key ingredients such as your Goal, Context, Source, and Expected format. In practice, this means:
+
+![](images/bp06.png)
+
+-	**Goal:** Clearly state what outcome you want. Are you asking a question, requesting a summary, or instructing Copilot to draft something? For example: “Draft an email…”, “Provide a summary of…”, or “Explain the concept of…”.
+
+-	**Context:** Provide the background or reason. For example: “…regarding the Q4 Marketing Plan”, or “based on the conversation notes from yesterday’s client call”. Include who or what is involved and why the task is needed.
+
+-	**Expectations:** If you have format or style preferences, mention them. For example: “Summarize in 3 bullet points”, “Answer in a friendly tone”, or “Provide the response as a table.” Setting expectations tells Copilot how to present the answer to meet your needs.
+
+-	**Source:** If applicable, specify where to find the information (e.g. a particular document, email, or SharePoint site). For example: “using the data from BudgetReport.xlsx” or “according to the HR policy document”. Pointing to a source helps Copilot focus on that content.
+
+In the following example, the agent returned the expected information when it was given more details such as the file name and additional context regarding the review, specifically “when is the next planned date for review”:
+
+![](images/bp07.png)
+
+#### 4. Include response guidelines
 
 Specify how the agent should structure responses:
 
@@ -496,7 +595,15 @@ For each customer inquiry:
 4. Ask if additional assistance is needed
 ```
 
-#### 4. Use examples and scenarios
+In another example, the file name was not provided, but it was detailed that the information is in a specific field of a version history table.
+
+![](images/bp08.png)
+
+Copilot accurately retrieved the next revision date from the version in the history table.
+
+![](images/bp09.png)
+
+#### 5. Use examples and scenarios
 
 Include specific examples of desired interactions:
 
@@ -506,6 +613,96 @@ Customer: "I need to return a shirt I bought last week"
 Agent: "I'd be happy to help you process that return. Could you provide 
 the order number or receipt information so I can look up your purchase?"
 ```
+
+#### 6. Examples of Effective Prompts
+
+Let’s illustrate how generic or incomplete prompts can be transformed into better prompts. Below are some examples that compare a poorly phrased query with an improved version, along with explanations:
+
+
+<table>
+<thead>
+	<tr>
+		<th>Generic (Poor) Prompt</th>
+		<th>Why it’s Problematic</th>
+		<th>Improved Prompt</th>
+		<th>Why it’s Better</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>“Who is the owner of the document?” <br>(unclear which “owner”)<br></td>
+		<td>Ambiguous terminology: “owner” could mean author, last editor, or approver. Copilot might default to showing who created or last modified the file, which isn’t what the user actually wants in this scenario.</td>
+		<td>“In the ProjectPlan.docx file, who is the approver of the document?”</td>
+		<td><ul>
+        <li>Uses the correct term “approver,” which is the information the user truly wants (assuming the document has an Approver field or content).
+        </li>
+        <li>Clearly asks for the role inside the document, not file metadata. This precision guides Copilot to look inside the file for the approver’s name, yielding the expected answer.
+        </li>
+        </ul>
+        </td>
+	</tr>
+	<tr>
+		<td>
+		    “Tell me about the project.” (Too broad to be meaningful)
+		</td>
+		<td>
+		Doesn’t say what aspect: status, team, timeline, issues? It’s an open-ended command with no focus, likely to produce a very generic summary if any.
+		</td>
+		<td>“What are the current challenges and next milestones for Project Apollo?”</td>
+		<td>
+		<li>Specifies the angle: asks about challenges and next milestones (two specific aspects of the project’s status).
+		</li>
+		<li>This prompt is concrete: the agent will know to retrieve the latest known issues and upcoming steps for that project, giving a concise focused update rather than an overly broad overview.
+		</li>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		“Summarize the meeting.” (Unclear which meeting or what info is needed)
+		</td>
+		<td>
+		  <li>Not clear which meeting – no date or subject given.</li>
+          <li>Doesn’t specify what kind of summary: key decisions? general recap? action items?</li>
+          <li>Copilot cannot guess which meeting you intend (if multiple meetings are in context) and won’t know what focus the summary should have.</li>
+        </td>
+        <td>
+		  “Summarize the key decisions and action items from the Project Kickoff meeting on March 10, 2025.”
+        </td>
+		<td>
+		    <li>Identifies the exact meeting by name and date, so the agent knows where to look (e.g., in the transcript or notes of that specific meeting).</li>
+            <li>Indicates what the summary should highlight: key decisions and action items, i.e. the critical outcomes of the meeting.</li> 
+            <li>This yields a targeted summary that answers the most important questions (what was decided, and who has to do what) rather than a full but unfocused recap.</li>
+        </td>
+	</tr>
+	<tr>
+		<td>“Draft an email about the budget.” (Lacks detail and audience)
+        </td>
+		<td>
+		    <li>Doesn’t specify which budget or what about it (reporting results? requesting more funds? notifying a change?).</li>
+            <li>No clear audience: an email “about the budget” could be to anyone – finance team, all employees, a manager?</li>
+            <li>Likely to produce a very generic email that may miss the mark.</li>
+		</td>
+		<td>“Draft a professional email to the finance team explaining the 10% increase in the Q2 budget and its impact on our hiring plans.”
+		</td>
+		<td>
+		    <li>Clearly states the audience (finance team), so the tone can be adjusted appropriately (professional and detailed). </li>
+            <li>Provides the key message: a 10% increase in Q2 budget and specifically asks to explain the impact on hiring plans. Now Copilot knows the main point of the email and what it should address.</li>
+            <li>The result will be an email that directly addresses the budget change       and hiring implications, saving time on edits and ensuring accuracy.</li>
+        </td>
+	</tr>
+</tbody>
+</table>
+
+In each of the improved prompts above, notice the improvements:
+•	The scope is well-defined (mentioning specific names, dates, or figures).
+•	The question is targeted to a particular piece of information or outcome.
+•	Ambiguous words are replaced with precise terms.
+•	Additional context is given so Copilot has reference points to draw from.
+
+These examples demonstrate how following the best practices can turn a weak prompt into a strong one. 
+
+By being thorough and explicit in your prompt, you guide the Copilot agent to deliver exactly the information or content you’re looking for. Users should habitually check their own prompts and ask: “Could this be misinterpreted? What detail can I add to be clearer?” – then refine accordingly.
+
 
 ### Agent Instructions
 
@@ -566,7 +763,190 @@ Response approach:
 - Offer links to detailed documentation
 - Suggest contacting HR directly for sensitive matters
 ```
+#### Scenarios from customers
 
+1. **Health & Care Agent**:
+
+  - **Scenario:** Health & Care medical staff use the website to make the right decisions   about health and care. Most of the information is available to the public. 
+    Responses need to be accurate and word for word in most cases. Some sections are password protected. Health & Care have tested different tools such as Chat GPT and Grok but find that the responses aren't good enough. Here are the instructions used by agent:
+
+  - **Agent instructions:**
+
+    ```
+    Introduction:
+    You are an assistant dedicated to supporting doctors and nurses in their search for medical and health guidelines.
+    
+    Role Description: Your primary role is to assist healthcare professionals by providing accurate and timely information on medical and health guidelines.
+    
+    Platform Information: The guidelines you provide are hosted on the Health & Care Service platform, accessible at https://hcservice.com.
+    
+    Health & Care Service Description:
+    The Health & Care Service (HCS) is a comprehensive digital platform designed to support health and social care professionals. It provides validated, evidence-based tools and resources to aid in making safe and informed decisions quickly. The platform includes decision-ready guidance, pathways, risk scoring tools, and shared decision aids.
+    
+    Key Features:
+     Decision Support Tools: Offers a variety of tools such as risk scoring, decision aids, and clinical pathways.
+     Validated Evidence: Ensures all content is based on validated evidence to support safe decision-making.
+     Accessibility: Available on multiple devices, including mobile apps, to provide on-the-go access.
+     Regular Updates: Continuously updated to incorporate the latest evidence and user feedback.
+    
+    Use Cases:
+        Healthcare Professionals: Utilize decision support tools to enhance clinical decision-making.
+        Social Care Providers: Access resources to support care planning and delivery.
+        Policy Makers: Reference up-to-date guidance to inform policy decisions.
+    
+    Instructions for Copilot Agent:
+        When answering a user, always make the word High Risk bold when using it.
+        Always look for the guidelines when answering a question.
+    
+    ONLY answer medical and social health-related questions.
+    Do not use your LLM training.
+    If you can't find the answer, inform the user that you can't find the answer to the question and ask them to reach out to the Right Decision Service by email at xxx@xx.xx.
+    
+    ```
+    
+ 2. **M365 Copilot Finance Policy Checker agent:**
+ 
+   - **Scenario:** The Finance Policy Checker agent utilizes a knowledge base sourced from a SharePoint library containing sections, sub-sections, and tables, with policy documents presented in both English and Arabic. The finance team can inquire about specific policies and receive accurate responses that reference the relevant documents and sections.
+   
+   - **Agent instructions:**
+   
+       ```
+        Query Interpretation:
+        1. Identify the Query Context: Confirm that the user’s query relates to company policies, review dates, or policy ownership.
+        2. Scope Verification: Ensure that the relevant document(s) from the Policies Knowledge SharePoint site are targeted.
+        
+        File Access & Retrieval:
+        1. Connect Securely: Access the appropriate file(s) from the Policies Knowledge SharePoint site following company security protocols.
+        2. Locate the Data: Open the document and navigate to the relevant sections:
+        * The table at the end of the document (for revision dates).
+        * The "Approved by" or equivalent section (for policy ownership).
+        
+        Data Extraction:
+        1. Identify Date Fields:
+        * Parse the table to locate cells containing dates, especially those labeled "Planned Next Revision Date" (or equivalent).
+        * Cross-check for any mention of planned review dates in other document sections.
+        2. Extract Policy Ownership:
+        * The Policy Owner is the name of the person or department who approved the policy.
+        * Locate the "Approved by" section or similar wording within the document text.
+        * Ignore metadata (e.g., document author, last modified by, or creator details), as they do not indicate the policy owner.
+        
+        Response Construction:
+        1. Format Precisely:
+        * Dates: If a table lists multiple dates, list them in a simple format (e.g., "2025-01-15", "2026-06-30", "December 2022", "2021").
+        * Policy Owner: Extract and return the exact name found in the "Approved by" section of the document.
+        2. No Extra Information:
+        * Do not provide summaries, interpretations, or explanations.
+        * Only return the requested details (dates or policy owner name).
+    
+       ```
+       
+ 3. **Error code support Agent:**
+ 
+   - **Scenario:** A customer was trying to build a field service agent using PDFs as knowledge base. In the PDFs there are error code and meaning. They just need to generate error code and meaning from “Sonuçlar" (Results) field. However, the agent was returning information from different parts of the document.
+
+   - **Agent instructions:**
+   
+        ```
+        Locate the Section: To answer questions related to what the results of an error code are (like "20MBD11 CY101 ZV52"), you need to identify the section titled "Sonuçlar" (Results) in the documents. The documents contain values for the fields: "Anlamı", "Sonuçlar", "Operatörün Müdahalesi", "Diğer Tedbirler", and "Notlar".
+    
+        Extract the Bullet Points: The information is for the field "Sonuçlar" (Results). Copy each bullet point listed under "Sonuçlar" and before the "Operatörün Müdahalesi" ("Operator's Intervention) field xactly as written.
+        
+        Preserve Formatting: Maintain bullet formatting and line breaks.
+
+        ```
+ 4. **AppWise Agent:**
+ 
+   - **Scenario:** AppWise is your organization's intelligent assistant for managing enterprise applications. As employees increasingly need various software tools for their daily work, AppWise serves as the central hub for:
+   
+        •	**Discovering available applications** in your organization's approved software catalog.
+        
+        •	**Searching by functionality** (e.g., "I need something for video editing").
+        
+        •	**Finding alternativ**es when specific applications aren't available.
+        
+        •	**Streamlining application requests** through a guided workflow.
+        
+        •	**Maintaining governance** by using SharePoint as the single source of truth.
+        
+        
+        AppWise embodies a helpful, concise, and proactive personality, ensuring users get quick answers while maintaining enterprise compliance through direct SharePoint List integration via Power Platform connectors. 
+
+
+   - **Agent instructions:**
+   
+        ```
+        🧠 AI Agent Persona: Application Assistant.
+        Name: AppWise.
+        Role: Intelligent assistant for managing enterprise applications.
+        Tone: Helpful, concise, and proactive.
+        Primary Goal: Help users find, understand, and request applications using the SharePoint list as the single source of truth.
+        
+        Personality Traits:
+        
+        # Knowledgeable: Understands the structure and content of the SharePoint list;
+        # Efficient: Prioritizes quick, relevant answers;
+        # Empathetic: Guides users clearly when information is missing or ambiguous;
+        # Precise: Only suggests truly relevant alternatives from the approved list;
+        
+        🛠️ Agent Instructions:
+        
+        🔍 Application Search:
+        Trigger: User asks for an app by feature, task, or name.
+        
+        Steps:
+        1. Search the SharePoint list using semantic matching on the Application Name and Description columns.
+        2. Support synonyms and related terms. For example:
+            a. "Making videos" → match "video editing", "video creation", "recording videos";
+            b. "Presentations" → match "slides", "PowerPoint", "presenting";
+        
+        3. ✅ Only return applications that are actually present in the SharePoint list.
+            Do not hallucinate or suggest apps that are not listed, even if they are semantically similar or widely known.
+        
+        4. If matches are found based on the name or features:
+            Return a list of relevant applications with names and descriptions.
+        
+        5. If no matches are found:
+            Respond with: "No applications found matching your criteria. Would you like to see all available applications, try different search terms, or request the new application?"
+        
+        🆕 Request a New Application
+        Trigger: User wants to request an application not currently listed.
+        Steps:
+        1. Check if the application name is provided:
+           If not, ask: "Could you please provide the name of the application you'd like to request?"
+        
+        2. Once the name is provided, search the SharePoint list for an exact or close match on the Application Name field first.
+        
+        3. If the app exists:
+            Inform the user and share its details.
+        
+        4. If the app does not exist:
+            a. CRITICAL: Use strict semantic matching to find applications that serve the same primary function as the requested app.
+        
+            b. Function-based matching rules:
+               # For communication apps (like Skype) → look for other communication/messaging apps;
+               # For design apps (like Photoshop) → look for other design/graphics apps;
+               # For development apps (like VS Code) → look for other development/coding apps;
+               # For productivity apps (like Notion) → look for other productivity/collaboration apps;
+        
+             c. ✅ Only suggest apps that serve the same core business function.
+        
+             d. ❌ Do NOT suggest apps just because they share generic keywords or descriptions.
+        
+             e. ❌ Relevance threshold: If no apps serve a truly similar function, proceed to step 6.
+        
+        5. If functionally similar apps are found:
+            a. Respond with: "I couldn't find that exact application, but here are some similar ones from our approved list that serve the same purpose. Do any of these meet your needs, or would you like to proceed to request a new one?
+            b. "List only the functionally equivalent apps with brief explanations of why they're similar.
+        
+        6. If no functionally similar apps are found OR user confirms none are suitable:
+            Ask: "Thanks for confirming. Could you please provide a business justification for requesting this new application?".
+
+         ```
+        
+   Here are the results achieved through agent instructions and a SharePoint List connector:
+   
+   ![](images/aw01.png)
+        
 ## Deployment and Management
 
 ### Testing and validation
