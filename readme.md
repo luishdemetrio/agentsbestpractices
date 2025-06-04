@@ -941,7 +941,7 @@ Response approach:
         6. If no functionally similar apps are found OR user confirms none are suitable:
             Ask: "Thanks for confirming. Could you please provide a business justification for requesting this new application?".
 
-         ```
+        ```
         
    Here are the results achieved through agent instructions and a SharePoint List connector:
    
