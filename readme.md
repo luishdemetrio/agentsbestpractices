@@ -316,6 +316,8 @@ If uploading files directly isn't feasible, you can configure your Copilot agent
 - Organize content in a logical hierarchy
 - Split extremely large documents into smaller parts
 
+More information at [Optimize SharePoint Content Retrieval in Your Agent | Microsoft Learn](https://learn.microsoft.com/microsoft-365-copilot/extensibility/optimize-sharepoint-content).
+
 #### Enhanced search capabilities
 
 For Custom Agents, you can enable **Enhanced search results** for SharePoint data, which provides:
@@ -331,6 +333,14 @@ For Custom Agents, you can enable **Enhanced search results** for SharePoint dat
 #### Performance considerations
 
 SharePoint as a knowledge source works best for smaller documents under the character limit. While it provides access to live, up-to-date content, it may not perform as well as uploaded files for large documents due to indexing limitations.
+
+Using the same example from the previous section (attached files), using SharePoint as a knowledge source did not yield an accurate answer for the NASA e-book file and prompt discussed previously (attached files as knowledge). This happens because the full document is indexed for attached files, which do not occur with SharePoint. Microsoft is working on improving these limitations.
+
+![](images/sp02.png)
+
+But it provides accurate results for small documents under 36,000 characters (~15–20 pages). For instance, the agent successfully answered the following questions:
+
+![](images/sp03.png)
 
 ### Pattern 4: Public Website Knowledge Integration
 
