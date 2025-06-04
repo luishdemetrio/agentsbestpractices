@@ -330,6 +330,8 @@ For Custom Agents, you can enable **Enhanced search results** for SharePoint dat
 - Your tenant must have at least one Microsoft 365 Copilot license
 - Enable the setting in your agent's **Generative AI** settings
 
+More info at [Optimize SharePoint Content Retrieval in Your Agent | Microsoft Learn](https://learn.microsoft.com/microsoft-365-copilot/extensibility/optimize-sharepoint-content).
+
 #### Performance considerations
 
 SharePoint as a knowledge source works best for smaller documents under the character limit. While it provides access to live, up-to-date content, it may not perform as well as uploaded files for large documents due to indexing limitations.
@@ -341,6 +343,10 @@ Using the same example from the previous section (attached files), using SharePo
 But it provides accurate results for small documents under 36,000 characters (~15–20 pages). For instance, the agent successfully answered the following questions:
 
 ![](images/sp03.png)
+
+The content utilized by the agent to respond to the user question is displayed in the following image.
+
+![](images/sp04.png)
 
 ### Pattern 4: Public Website Knowledge Integration
 
