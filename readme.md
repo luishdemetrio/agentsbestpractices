@@ -308,6 +308,8 @@ If uploading files directly isn't feasible, you can configure your Copilot agent
 - PowerPoint files (.pptx)
 - PDF documents (.pdf)
 
+Learn more about SharePoint as a knowledge base at [Add SharePoint as a knowledge source - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint).
+
 #### Optimization recommendations
 
 **Content organization:**
@@ -330,6 +332,8 @@ For Custom Agents, you can enable **Enhanced search results** for SharePoint dat
 - Your tenant must have at least one Microsoft 365 Copilot license
 - Enable the setting in your agent's **Generative AI** settings
 
+![](images/sp05.png)
+
 More info at [Optimize SharePoint Content Retrieval in Your Agent | Microsoft Learn](https://learn.microsoft.com/microsoft-365-copilot/extensibility/optimize-sharepoint-content).
 
 #### Performance considerations
@@ -348,11 +352,13 @@ The content utilized by the agent to respond to the user question is displayed i
 
 ![](images/sp04.png)
 
-### Pattern 4: Public Website Knowledge Integration
+### Pattern 4: Public Website Integration
 
 When incorporating public web content into Copilot, you have two distinct approaches with different benefits and use cases.
 
 #### Web Grounding via Bing (Real-time Search)
+
+![](images/pw01.png)
 
 **How it works:**
 Copilot issues live search queries through the Bing API based on user prompts, then uses web results to inform answers. This provides access to up-to-date information from the internet beyond your organizational data.
@@ -369,7 +375,9 @@ Copilot issues live search queries through the Bing API based on user prompts, t
 - General facts not available in internal systems
 - Supplementing static training data with recent information
 
-#### Enterprise Web Graph Connector (Indexed Content)
+#### Enterprise Web Copilot Graph Connector (Indexed Content)
+
+![](images/pw02.png)
 
 **How it works:**
 Ingest public website content into your Microsoft 365 tenant using a Graph connector. This crawls and copies site pages into the Microsoft Graph index (up to 50 sites per connector).
@@ -403,6 +411,28 @@ Ingest public website content into your Microsoft 365 tenant using a Graph conne
 **Choosing the right approach:**
 - Use **web grounding** for dynamic, current information that changes frequently
 - Use **Graph connector** for curated, stable content that requires deep semantic understanding
+
+### Examples:
+
+`Question 1: When does NASA's SpaceX Crew-10 mission scheduled to launch?`
+
+<table>
+<thead>
+	<tr>
+		<th>Declarative Agent – Graph Connector</th>
+		<th>Custom Agent – Public website (real-time)</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>The NASA's SpaceX Crew-10 mission is scheduled to launch in March 20251 . This mission will see NASA astronauts Anne McClain and Nichole Ayers, JAXA astronaut Takuya Onishi, and Roscosmos cosmonaut Kirill Peskov traveling to the International Space Station1 .<br>If you have any more questions or need further details, feel free to ask!<br>1 reference<br><a href="https://www.nasa.gov/event/nasas-spacex-crew-10-launch/">https://www.nasa.gov/event/nasas-spacex-crew-10-launch/</a><br></td>
+		<td>The launch of NASA's SpaceX Crew-10 mission is scheduled for no earlier than February 2025 1 .<br>1 reference<br><br>1 
+		<a href="https://www.nasa.gov/mission/nasas-spacex-crew-10/">https://www.nasa.gov/mission/nasas-spacex-crew-10/</a><br></td>
+	</tr>
+</tbody>
+</table>
+
+
 
 #### Implementation considerations
 
